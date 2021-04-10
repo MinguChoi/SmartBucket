@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "58087339660",
+    "project_id": "smartbucket-f6d67",
+    "storage_bucket": "smartbucket-f6d67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58087339660:android:d3a2c15bb98afdb0b72da9",
+        "android_client_info": {
+          "package_name": "com.example.smartbucket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58087339660-qn4uqu8jui5bvsetd0qfjttf9kfo8snh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1O5_gfGsWWezSl22jgTWguq8EJ4IB370"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58087339660-qn4uqu8jui5bvsetd0qfjttf9kfo8snh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

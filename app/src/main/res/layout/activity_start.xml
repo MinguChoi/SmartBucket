@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StartActivity">
+
+    <TextView
+        android:id="@+id/place_start_TXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="180dp"
+        android:text="쇼핑 장소를 입력하세요"
+        android:textSize="20dp"
+        android:fontFamily="@font/hoonsaemaulundongr"
+        android:textColor="@color/appDefault"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/place_start_ETXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="300dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="ex) 코스트코 혁신도시점"
+        android:fontFamily="@font/hoonsaemaulundongr"
+        app:layout_constraintStart_toStartOf="@id/place_start_TXT"
+        app:layout_constraintTop_toBottomOf="@+id/place_start_TXT" />
+
+    <TextView
+        android:id="@+id/cart_start_TXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="카트 번호를 선택하세요"
+        android:textSize="20dp"
+        android:fontFamily="@font/hoonsaemaulundongr"
+        android:textColor="@color/appDefault"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/place_start_TXT"
+        app:layout_constraintTop_toBottomOf="@id/place_start_ETXT" />
+
+    <Spinner
+        android:id="@+id/cartSpinner"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/place_start_TXT"
+        app:layout_constraintTop_toBottomOf="@+id/cart_start_TXT" />
+
+    <ImageButton
+        android:id="@+id/cart_start_BTN"
+        android:layout_width="142dp"
+        android:layout_height="121dp"
+        android:layout_marginBottom="100dp"
+        android:adjustViewBounds="true"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/cart" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
