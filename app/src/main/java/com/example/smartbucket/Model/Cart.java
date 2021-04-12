@@ -1,5 +1,6 @@
 package com.example.smartbucket.Model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Cart {
         this.uid = uid;
         this.cartNum = map.get("cartNum").toString();
         this.items = new ArrayList<>((ArrayList<String>) map.get("items"));
+
     }
 
     // Get Cart Instance

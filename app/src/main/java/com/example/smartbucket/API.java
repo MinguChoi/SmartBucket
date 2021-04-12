@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -88,8 +89,9 @@ public class API {
                 Cart cart = new Cart(dataSnapshot.getKey(), (HashMap) dataSnapshot.getValue());
 //                Cart myCart = Cart.getInstance();
 //                myCart = cart;
-
                 List<String> itemUid = cart.getItems();
+                Log.d(Utils.TAG, "total item in cart : " + String.valueOf(itemUid.size()));
+
                 List<Item> items = new ArrayList<>();
                 DB_ITEM.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -100,10 +102,14 @@ public class API {
                         else {
                             for(DataSnapshot childSnapshot: task.getResult().getChildren()){
                                 Item item = new Item(childSnapshot.getKey(), (HashMap)(childSnapshot.getValue()));
-                                if(itemUid.contains(item.getUid())) {
-                                    items.add(item);
+                                for(int i=0; i<itemUid.size() ; i++) {
+                                    if(itemUid.get(i) != null && item.getUid().equals(itemUid.get(i))) {
+                                        items.add(item);
+                                        Log.d(Utils.TAG, "this item is added: " + item.getName());
+                                    }
                                 }
                             }
+                            Log.d(Utils.TAG, "total num of items " + String.valueOf(items.size()));
                             completion.onCompletion(items);
                         }
                     }
@@ -117,15 +123,13 @@ public class API {
         });
     }
 
-    public static void getImage(String itemName, ImageView imageView, Context ctx){
+    public static void getImage(String itemName, Context ctx, final OnCompletion completion){
         String itemNameJPG = itemName + ".jpg";
-        StorageReference imageRef = API.ST_ITEM_IMAGE.child(itemNameJPG);
-        final long ONE_MEGABYTE = 1024 * 1024;
-        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+
+        API.ST_ITEM_IMAGE.child(itemNameJPG).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                imageView.setImageBitmap(bmp);
+            public void onSuccess(Uri uri) {
+                completion.onCompletion(uri);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -133,6 +137,22 @@ public class API {
                 Toast.makeText(ctx, "No Such file or Path found!!", Toast.LENGTH_LONG).show();
             }
         });
+
+//        StorageReference imageRef = API.ST_ITEM_IMAGE.child(itemNameJPG);
+//        final long ONE_MEGABYTE = 1024 * 1024;
+//        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+//            @Override
+//            public void onSuccess(byte[] bytes) {
+//                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                completion.onCompletion(bmp);
+//                //imageView.setImageBitmap(bmp);
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                Toast.makeText(ctx, "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 
 }

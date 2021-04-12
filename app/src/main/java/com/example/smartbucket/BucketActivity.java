@@ -23,6 +23,7 @@ public class BucketActivity extends AppCompatActivity {
     private ItemAdapter adapter;
     private List<Item> items;
     private Button payBTN, cancelBTN, finishBTN;
+    private TextView msgDialogTXT;
     private Dialog confirmDialog;
 
     @Override
@@ -51,24 +52,33 @@ public class BucketActivity extends AppCompatActivity {
 
         confirmDialog = new Dialog(this);
         confirmDialog.setContentView(R.layout.custom_dialog);
+        msgDialogTXT = (TextView) confirmDialog.findViewById(R.id.msg_dialog_TXT);
         cancelBTN = (Button) confirmDialog.findViewById(R.id.cancel_dialog_BTN);
         finishBTN = (Button) confirmDialog.findViewById(R.id.finish_dialog_BTN);
 
         placeTXT.setText(intent.getStringExtra("place"));
-        cartTXT.setText(intent.getStringExtra("cart"));
+        cartTXT.setText(intent.getStringExtra("cart") + "번 카트");
     }
 
     public void displayListView() {
         API.fetchItems(new OnCompletion() {
             @Override
             public void onCompletion(Object object) {
-                adapter = new ItemAdapter((ArrayList<Item>) object, BucketActivity.this);
+                items = (ArrayList<Item>) object;
+                adapter = new ItemAdapter(items, BucketActivity.this);
                 itemListView.setAdapter(adapter);
             }
         });
     }
 
     public void showDialog() {
+        String names = "";
+        String price = "0";
+        for(int i=0; i<items.size(); i++) {
+            names = names + items.get(i).getName() + "\n";
+            price = String.valueOf( Integer.parseInt(price) + Integer.parseInt(items.get(i).getPrice()) );
+        }
+        msgDialogTXT.setText(names + "\n" + price + "원");
         cancelBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

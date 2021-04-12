@@ -2,6 +2,8 @@ package com.example.smartbucket;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.smartbucket.Model.Item;
 
+import java.net.URI;
 import java.util.List;
 import java.util.logging.Handler;
 
@@ -42,10 +46,19 @@ public class ItemAdapter extends ArrayAdapter {
         TextView price = holder.priceTXT;
 
         Item item = itemList.get(position);
-        API.getImage(item.getName(), itemImg, context);
+        API.getImage(item.getName(), context, new OnCompletion() {
+            @Override
+            public void onCompletion(Object object) {
+                //itemImg.setImageBitmap((Bitmap)object);
+                Glide.with(context)
+                        .load((Uri)object)
+                        .into(itemImg);
+                //itemImg.setImageURI((Uri) object);
+            }
+        });
         name.setText(item.getName());
         description.setText(item.getDescription());
-        price.setText(item.getPrice());
+        price.setText(item.getPrice() + "원");
 
         return convertView;
     }
