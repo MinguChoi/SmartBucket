@@ -3,9 +3,11 @@ package com.example.smartbucket.Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Cart {
     // Variables
+    private static Cart single_instance = null;
     private String uid;
     private String cartNum;
     private List<String> items;
@@ -13,10 +15,18 @@ public class Cart {
     // Constructor
     public Cart() {this.items = new ArrayList<>();}
 
-    public Cart(HashMap<String, Object> map) {
-        this.uid = map.get("uid").toString();
+    public Cart(String uid, HashMap<String, Object> map) {
+        this.uid = uid;
         this.cartNum = map.get("cartNum").toString();
         this.items = new ArrayList<>((ArrayList<String>) map.get("items"));
+    }
+
+    // Get Cart Instance
+    public static Cart getInstance() {
+        if (single_instance == null)
+            single_instance = new Cart();
+
+        return single_instance;
     }
 
     // Getter
@@ -44,5 +54,14 @@ public class Cart {
     // Delete item
     public void deleteItem(String item_id) {
         this.items.remove(item_id);
+    }
+
+    // Custom Method
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("cartNum", cartNum);
+        result.put("items", items);
+
+        return result;
     }
 }

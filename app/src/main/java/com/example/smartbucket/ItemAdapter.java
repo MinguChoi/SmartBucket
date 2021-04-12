@@ -1,6 +1,7 @@
 package com.example.smartbucket;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.example.smartbucket.Model.Item;
 
 import java.util.List;
+import java.util.logging.Handler;
 
 public class ItemAdapter extends ArrayAdapter {
 
@@ -40,7 +42,7 @@ public class ItemAdapter extends ArrayAdapter {
         TextView price = holder.priceTXT;
 
         Item item = itemList.get(position);
-        //emotionImageView.setImageResource(imageId);
+        API.getImage(item.getName(), itemImg, context);
         name.setText(item.getName());
         description.setText(item.getDescription());
         price.setText(item.getPrice());

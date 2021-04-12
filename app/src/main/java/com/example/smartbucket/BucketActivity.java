@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -58,41 +59,28 @@ public class BucketActivity extends AppCompatActivity {
     }
 
     public void displayListView() {
-        // Get Items from the server in real time but manually typed for testing
-        Item a = new Item();
-        a.setName("진라면");
-        a.setDescription("120G 5개입");
-        a.setPrice("2750원");
-        Item b = new Item();
-        b.setName("예감");
-        b.setDescription("치즈맛");
-        b.setPrice("1200원");
-        Item c = new Item();
-        c.setName("서울우유");
-        c.setDescription("1.25L");
-        c.setPrice("2200원");
-        items = new ArrayList<>();
-        items.add(a);
-        items.add(b);
-        items.add(c);
-
-        adapter = new ItemAdapter(items, BucketActivity.this);
-        itemListView.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
+        API.fetchItems(new OnCompletion() {
+            @Override
+            public void onCompletion(Object object) {
+                adapter = new ItemAdapter((ArrayList<Item>) object, BucketActivity.this);
+                itemListView.setAdapter(adapter);
+            }
+        });
     }
 
     public void showDialog() {
         cancelBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                confirmDialog.dismiss();
             }
         });
         finishBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                confirmDialog.dismiss();
             }
         });
+        confirmDialog.show();
     }
 }
