@@ -12,22 +12,104 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
+        android:maxWidth="250dp"
+        android:maxHeight="250dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/bucket"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/hoonsaemaulundongr"
         android:text="스마트 버켓"
         android:textColor="@color/appDefault"
         android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="물건담고 결제하면 끝!"
+        android:fontFamily="@font/hoonsaemaulundongr"
+        android:textColor="@color/grey"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/id_welcome_TXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아이디"
+        android:fontFamily="@font/hoonsaemaulundongr"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/imageView"/>
+
+    <EditText
+        android:id="@+id/id_welcome_ETXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="250dp"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@id/id_welcome_TXT"
+        app:layout_constraintTop_toBottomOf="@id/id_welcome_TXT"
+        />
+
+    <TextView
+        android:id="@+id/pw_welcome_TXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호"
+        android:fontFamily="@font/hoonsaemaulundongr"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/id_welcome_ETXT"/>
+
+    <EditText
+        android:id="@+id/pw_welcome_ETXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="250dp"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@id/id_welcome_TXT"
+        app:layout_constraintTop_toBottomOf="@id/pw_welcome_TXT" />
+
+    <Button
+        android:id="@+id/ok_welcome_BTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시작하기"
+        app:backgroundTint="@color/appDefault"
+        android:fontFamily="@font/hoonsaemaulundongr"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pw_welcome_ETXT"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@id/signUp_welcome_TXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hoonsaemaulundongr"
+        android:text="회원가입"
+        android:textColor="#F46A3F"
+        android:textSize="13dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
