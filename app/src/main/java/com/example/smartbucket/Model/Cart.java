@@ -39,9 +39,9 @@ public class Cart {
     // Setter
     public void setUid(String uid) { this.uid = uid; }
     public void setCartNum(String cartNum) { this.cartNum = cartNum; }
-    public void setItems(List<String> items) {
+    public void setItems(Object items) {
         if (items != null) {
-            this.items = items;
+            this.items = (ArrayList<String>)(items);
         }
     }
 

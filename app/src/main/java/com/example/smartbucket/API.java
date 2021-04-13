@@ -86,9 +86,12 @@ public class API {
         DB_CART.child("-MY3f-2AvlU40qD9PeyM").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Cart cart = new Cart(dataSnapshot.getKey(), (HashMap) dataSnapshot.getValue());
-//                Cart myCart = Cart.getInstance();
-//                myCart = cart;
+                Cart cart = new Cart();
+                cart.setUid(dataSnapshot.getKey());
+                HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
+                cart.setCartNum(value.get("cartNum").toString());
+                cart.setItems(value.get("items"));
+
                 List<String> itemUid = cart.getItems();
                 Log.d(Utils.TAG, "total item in cart : " + String.valueOf(itemUid.size()));
 
