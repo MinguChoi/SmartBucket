@@ -94,7 +94,7 @@ public class API {
 //                cart.setItems(value.get("items"));
 
                 List<String> itemUid = cart.getItems();
-                Log.d(Utils.TAG, "total item in cart : " + String.valueOf(itemUid.size()));
+                //Log.d(Utils.TAG, "total item in cart : " + String.valueOf(itemUid.size()));
 
                 List<Item> items = new ArrayList<>();
                 DB_ITEM.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -106,10 +106,12 @@ public class API {
                         else {
                             for(DataSnapshot childSnapshot: task.getResult().getChildren()){
                                 Item item = new Item(childSnapshot.getKey(), (HashMap)(childSnapshot.getValue()));
-                                for(int i=0; i<itemUid.size() ; i++) {
-                                    if(itemUid.get(i) != null && item.getUid().equals(itemUid.get(i))) {
-                                        items.add(item);
-                                        Log.d(Utils.TAG, "this item is added: " + item.getName());
+                                if(itemUid != null){
+                                    for(int i=0; i<itemUid.size() ; i++) {
+                                        if(itemUid.get(i) != null && item.getName().equals(itemUid.get(i))) {
+                                            items.add(item);
+                                            Log.d(Utils.TAG, "this item is added: " + item.getName());
+                                        }
                                     }
                                 }
                             }

@@ -17,6 +17,7 @@ public class Cart {
     private static Cart single_instance = null;
     private String uid;
     private String cartNum;
+    private String isTaken = "false";
     private List<String> items;
 
     // Constructor
@@ -25,15 +26,13 @@ public class Cart {
     public Cart(String uid, HashMap<String, Object> map) {
         this.uid = uid;
         this.cartNum = map.get("cartNum").toString();
-        Log.d(Utils.TAG, "set items" + map.get("items").toString());
+        this.isTaken = map.get("isTaken").toString();
         if((map.get("items")) instanceof ArrayList) {
             this.items = (ArrayList<String>)map.get("items");
         }
         if((map.get("items")) instanceof HashMap) {
             this.items = new ArrayList<>(((HashMap<String, String>)map.get("items")).values());
         }
-        //this.items = new ArrayList<>((ArrayList<String>) map.get("items"));
-
     }
 
     // Get Cart Instance
@@ -47,11 +46,13 @@ public class Cart {
     // Getter
     public String getUid() {return uid;}
     public String getCartNum() {return cartNum;}
+    public String getIsTaken() {return isTaken;}
     public List<String> getItems() {return items;}
 
     // Setter
     public void setUid(String uid) { this.uid = uid; }
     public void setCartNum(String cartNum) { this.cartNum = cartNum; }
+    public void setIsTaken(String isTaken) { this.isTaken = isTaken; }
     public void setItems(Object items) {
         if (items != null) {
             this.items = (ArrayList<String>)items;
@@ -77,6 +78,7 @@ public class Cart {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("cartNum", cartNum);
+        result.put("isTaken", isTaken);
         result.put("items", items);
 
         return result;
